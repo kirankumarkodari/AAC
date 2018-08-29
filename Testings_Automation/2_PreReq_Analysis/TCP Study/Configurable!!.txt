@@ -1,0 +1,19 @@
+1) Window policy 
+2) Retransmission policy 
+3) Acknowledgement policy 
+4) Congestion control
+5) Max number of Connections
+6) Reserving Particular port number for client 
+7) Tcb Table size 
+8) Time_Wait 
+9) KeepALive Packet default is for every 2 hours, to check connections which were not closed properly by remote hosts. (KeepAlive Time)
+10) Max Cuncureent Connections (Microsoft Professional edition is not able to accept more than 5 Connections cuncurrently ) 
+11) Can I set PSH flag ??
+12) Can I Set Urgent Flag??
+
+TCP Options: 
+http://www.firewall.cx/networking-topics/protocols/tcp/138-tcp-options.html
+
+TCP Buffer Management: 
+https://it.toolbox.com/blogs/craigborysowich/tcp-ip-interfaces-and-buffer-management-111216
+

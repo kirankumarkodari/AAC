@@ -1,0 +1,60 @@
+1) IP Functions 
+http://www.tcpipguide.com/free/t_IPFunctions.htm
+
+2) Introduction to IP 
+https://technet.microsoft.com/en-us/library/bb726991.aspx
+
+Professor name: Dr Richard Mortier
+1) Why do we need IP Addresses? 
+https://www.youtube.com/watch?v=iGPXkxeOfdk
+
+2) Machine Learning <Computerphile> 
+https://www.youtube.com/watch?annotation_id=annotation_3477674021&feature=iv&src_vid=iGPXkxeOfdk&v=qDbpYUbf3e0
+
+3) Routing in IP (When we have predefined routes we can specify the route with out giiving burden to routers) ? 
+https://www.youtube.com/timedtext_editor?action_mde_edit_form=1&v=AkxqkoxErRk&lang=en&bl=vmp&ui=hd&ref=player&tab=captions
+
+4) Introduction to IP Address ? 
+http://searchnetworking.techtarget.com/tutorial/Protocols-Lesson-1-Introduction-to-the-Internet-Protocol
+
+
+
+
+5) Why IP ? 
+https://superuser.com/questions/131178/ip-address-vs-mac-addresses
+http://www.freesoft.org/CIE/Course/Subnet/3.htm
+https://www.docsity.com/en/answers/purpose-hierarchical-internet-explain-hierarchical-address/185608/
+https://en.wikipedia.org/wiki/Hierarchical_routing
+
+6) Routing ?
+https://www.youtube.com/watch?v=6uNwLN3P3Pc
+
+7) ARP ? 
+https://www.quora.com/Which-protocol-is-used-to-find-MAC-address-of-a-Given-IP-address
+
+8) What  is the function of protocol number in IP  ?
+https://learningnetwork.cisco.com/thread/61029
+
+9) Major ip address blocks in India ? 
+https://www.nirsoft.net/countryip/in.html
+
+10) IP Fragmentation & Reassembly ? (Fragmentation creates overhead * 2 , It is not suitable for TCP because if any fragment lost entire datagram should be resend)
+https://www.savvius.com/networking-glossary/tcp_ip_overview/ip/ip_fragmentation/
+
+11) How long(distance or wide) the router maintains the routing table ? 
+https://stackoverflow.com/questions/4769993/how-does-a-router-use-the-routing-table-to-choose-the-outgoing-line
+
+12) Important Question of Internet protocol(TTL,BigEndian,..etc) ? 
+https://www.netometer.com/qa/ip.html
+
+13) PathMTU Discovery Technique          -- Useful If you don't change MSS by using TCP option ( To Avoid Fragmentation)
+https://tools.ietf.org/html/rfc1191   
+
+14) IP Options Clear Explanation
+https://www.iana.org/assignments/ip-parameters/ip-parameters.xhtml
+
+
+
+
+
+

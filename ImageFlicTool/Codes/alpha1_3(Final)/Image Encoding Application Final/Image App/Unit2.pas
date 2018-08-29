@@ -1,0 +1,381 @@
+unit Unit2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, ComCtrls, IOUtils;
+
+type
+
+  TForm2 = class(TForm)
+    Button1: TButton; // Label For Giving Image Path
+    Image1: TImage; // To Display Selecetd Image .
+    flicData: TRichEdit;
+    Colors: TRichEdit;
+    LabeledEdit1: TLabeledEdit;
+    procedure Button1Click(Sender: TObject);
+    // Procedure For Generate Hex Data.
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    imgPath: string; // To Store The Image Path.
+    resStr: Array of string; // To Store The Hexa Values Of The Image.
+    imgWidth, imgHeight: Integer; // To Store Image Height And Image Weight.
+    imgSize: string;
+    ResultBytes: TBytes; // The Image Will Be converted As Bytes.
+    F: File; // The Resultant Bytes Will Be Stored In  d:\Test For Pallert.txt .
+    w: Integer; // To Store The Number Bytes Of The Image ..
+
+    colorindex, pallertcount, rptcolorcount: Byte;
+    datacount: Integer;
+
+    // rptcolorcount is to store How many Times The Same Color Has Appeared.
+
+    // colorindex is to store the index of the color in palllertBuffer.
+
+    // pallertcount is to point the PallertBuffer .
+
+    // datacount is to point the dataBuffer.
+
+    pallertBuffer: Array of Array of string; // PallertBuffer To Store Only The Unique Colors Of the Image.
+
+    dataBuffer: Array of Array of string; // dataBuffer To STore Encoded Format Of the Image.
+
+    pflag: Byte; // To Indicate The Status Of That Particular Color IS Already Inserted In PallertBuffer or Not.
+
+    finalStr: string; // To Store All The Data in Pallert Buffer As string.
+    dataStr: string; // Tio Store All The Data in dataBuffer As String.
+
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.Button1Click(Sender: TObject); // Whenever User Clicks On Generate Hex Data Than This Proc Will call.
+var
+  widIdx, heiIdx: Integer; // To Iterate In for Loop For All Pixels Of the Image(widIdx*heiidx).
+  DupItr: Integer; //
+  pItr: Integer;
+  resIdx: Integer;
+  myFile: TextFile; // Pallert Data Will Be stored in myFile-> paleertfile.txt.
+  flicFile: TextFile; // Flic Data Will Be stored in flicFile -> flicfile.txt.
+  totalCount: Integer;
+  filename: string;
+  fItr: Byte;
+  dataSize: string;
+  imgStrH: string;
+  imgStrW: string;
+  count: Byte;
+  pallertIdx: Integer;
+  DupIdx: Integer;
+  Itr: Integer;
+  IsColorExisted: Boolean;
+  pallertColor_Idx: Integer;
+  totalpixel_colorcount: Integer;
+  IsLastPixelProcessing: Boolean;
+begin
+  finalStr := '';
+  dataStr := '';
+  pflag := 0;
+  pallertcount := 0;
+  datacount := 0;
+  colorindex := 0;
+  DupItr := 0;
+  resIdx := 0;
+  pItr := 0;
+  totalCount := 0;
+  dataSize := '';
+  imgStrH := '';
+  imgStrW := '';
+  count := 0;
+  pallertIdx := 0;
+  IsLastPixelProcessing := false;
+  imgPath := LabeledEdit1.Text;
+  filename := TPath.GetFileNameWithoutExtension(imgPath);
+  Image1.picture.LoadFromFile(imgPath);
+  imgWidth := Image1.Width;
+  imgHeight := Image1.Height;
+  SetLength(ResultBytes, imgWidth * imgHeight * 3);
+
+  SetLength(resStr, imgWidth * imgHeight * 3);
+
+  SetLength(dataBuffer, imgWidth * imgHeight, 3); // DATA BUFFER
+
+  for heiIdx := 0 to imgHeight - 1 do
+  begin
+    for widIdx := 0 to imgWidth - 1 do
+    begin
+      ResultBytes[resIdx] := GetRValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+      ResultBytes[resIdx] := GetGValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+      ResultBytes[resIdx] := GetBValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+    end;
+  end;
+
+  // To Store Bytesin  Hex
+  for resIdx := 0 to Length(ResultBytes) - 1 do
+  begin
+    resStr[resIdx] := '0X' + IntToHex(ResultBytes[resIdx], 2);
+  end;
+
+  // color processing for Hexa Input .
+  resIdx := 0;
+  DupIdx := 0;
+  totalpixel_colorcount := 0;
+  SetLength(pallertBuffer, 256, 3); // PALLETRING BUFFER   for storing unique pixels (i.e different RGB values)
+
+  for heiIdx := 0 to 255 do
+  begin
+    for widIdx := 0 to 2 do
+    begin
+      pallertBuffer[heiIdx, widIdx] := '0XFF'; // Filling Pallert Buffer with OXFFF by default.
+    end;
+  end;
+
+  // to Store the Unique Pixel colors in the pallert Buffer.
+  try
+    while resIdx <= Length(resStr) - 1 do
+    begin
+      DupIdx := resIdx + 3; // for point the next pixel
+
+      if (resStr[resIdx] = '0XFF') and (resStr[resIdx + 1] = '0XFF') and
+        (resStr[resIdx + 2] = '0XFF') and (resIdx = 0) then // To store if default pixel is the first color beacuse we are going to consider it as duplicate in the below for loop.
+      begin
+        pallertBuffer[pallertIdx, 0] := resStr[resIdx];
+        pallertBuffer[pallertIdx, 1] := resStr[resIdx + 1];
+        pallertBuffer[pallertIdx, 2] := resStr[resIdx + 2];
+        Inc(pallertIdx);
+      end; // To Store the OXFF OXFF OXFF pixel at one time.
+
+
+      // to Iterate the Palllert Buffer if there is same color pixel
+
+      for Itr := 0 to pallertIdx do
+      begin
+        if (pallertBuffer[Itr, 0] = resStr[resIdx]) and
+          (pallertBuffer[Itr, 1] = resStr[resIdx + 1]) and
+          (pallertBuffer[Itr, 2] = resStr[resIdx + 2]) then
+        begin
+          IsColorExisted := true;
+          break;
+        end;
+
+      end;
+
+      if IsColorExisted then // If same color pixel already existed in the Pallert Buffer
+      begin
+        IsColorExisted := false;
+      end
+      else
+      begin // Other wise Add the different color pixel to Pallert Buffer.
+        if pallertIdx > 255 then
+        begin
+          ShowMessage('It is not valid image!!');
+          Application.Terminate;
+        end
+        else
+        begin
+          pallertBuffer[pallertIdx, 0] := resStr[resIdx];
+          pallertBuffer[pallertIdx, 1] := resStr[resIdx + 1];
+          pallertBuffer[pallertIdx, 2] := resStr[resIdx + 2];
+          Inc(pallertIdx); // To point to the next Location
+        end;
+
+      end;
+      TRY
+        while (resStr[resIdx] = resStr[DupIdx]) and
+          (resStr[resIdx + 1] = resStr[DupIdx + 1]) and
+          (resStr[resIdx + 2] = resStr[DupIdx + 2]) do
+        begin
+          if DupIdx > Length(resStr) - 1 then
+          begin
+            IsLastPixelProcessing := true;
+            break;
+          end;
+          resIdx := resIdx + 3; // Increments to the next
+          DupIdx := resIdx + 3;
+        end;
+      except
+        on E: Exception do
+        begin
+          ShowMessage('Accessing in Resstr!!');
+        end;
+
+      end;
+      // we need unique colors to be stored in pallertBuffer.
+
+      resIdx := DupIdx;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Error While Accessing  Pallert Buffer!!'+ 'Pallert Index'+inttoStr(pallertIdx)+':'+'res Idx'+InttoStr(resIdx)+':'+'Dup Idx:'+InttoStr(DupIdx));
+      Application.Terminate;
+    end;
+
+  end;
+  try
+    resIdx := 0;
+    DupIdx := 0;
+    While resIdx <= Length(resStr) - 1 do
+    begin
+      DupIdx := resIdx + 3; // for point the next pixel
+      rptcolorcount := 1;
+
+      for Itr := 0 to pallertIdx do
+      begin
+        if (pallertBuffer[Itr, 0] = resStr[resIdx]) and
+          (pallertBuffer[Itr, 1] = resStr[resIdx + 1]) and
+          (pallertBuffer[Itr, 2] = resStr[resIdx + 2]) then
+        begin
+          pallertColor_Idx := Itr; // To store the color index in the Pallert Buffer;
+          break;
+        end;
+      end;
+
+      while (resStr[resIdx] = resStr[DupIdx]) and
+        (resStr[resIdx + 1] = resStr[DupIdx + 1]) and
+        (resStr[resIdx + 2] = resStr[DupIdx + 2]) do
+      begin
+        if DupIdx > Length(resStr) - 1 then
+        begin
+          // resIdx is at the last pixel.
+          IsLastPixelProcessing := true;
+          break;
+        end;
+        resIdx := resIdx + 3; // Increments to the next pixel.
+        DupIdx := resIdx + 3;
+        Inc(rptcolorcount);
+        if rptcolorcount = 255 then // Consider if the same color repeats more than 255 times
+        begin
+          dataBuffer[datacount, 0] := '0X00' + ', ';
+          dataBuffer[datacount, 1] := '0X' + IntToHex(rptcolorcount, 2) + ', ';
+          dataBuffer[datacount, 2] := '0X' + IntToHex(pallertColor_Idx, 2)
+            + ', ';
+          Inc(datacount);
+          totalpixel_colorcount := totalpixel_colorcount + rptcolorcount; // To update the Totalcount variable if color appears more than 255 times.
+          rptcolorcount := 0;
+
+        end; // Consider if color pixel is repeated more than 255 times.
+      end;
+      // we need unique colors to be stored in pallertBuffer.
+
+      if rptcolorcount > 0 then // Need to store the color count for  color index.
+      begin
+        dataBuffer[datacount, 0] := '0X00' + ', ';
+        dataBuffer[datacount, 1] := '0X' + IntToHex(rptcolorcount, 2) + ', ';
+        dataBuffer[datacount, 2] := '0X' + IntToHex(pallertColor_Idx, 2) + ', ';
+        Inc(datacount);
+        totalpixel_colorcount := totalpixel_colorcount + rptcolorcount;
+      end;
+
+      resIdx := DupIdx;
+    end;
+  except
+    on E: Exception do
+    begin
+      ShowMessage(
+        'Exception  Image Has More than 256 Colors OutPut Will Be Shown For only 256 Colors');
+    end;
+
+  end;
+ 
+
+  if totalpixel_colorcount = (imgWidth * imgHeight) then
+  begin
+    ShowMessage('Matched Exactly');
+  end
+  else
+  begin
+    ShowMessage('Not Mtached');
+  end;
+  for resIdx := 1 to Length(pallertBuffer) - 1 do
+  begin
+    finalStr := finalStr + pallertBuffer[resIdx, 0] + ', ' + pallertBuffer
+      [resIdx, 1] + ', ' + pallertBuffer[resIdx, 2] + ', ';
+    Inc(count);
+    if count = 5 then
+    begin
+      finalStr := finalStr + sLineBreak;
+      count := 0;
+    end;
+
+  end;
+  count := 0;
+  for resIdx := 0 to datacount - 1 do
+  begin
+    dataStr := dataStr + dataBuffer[resIdx, 0] + dataBuffer[resIdx,
+      1] + dataBuffer[resIdx, 2];
+    Inc(count);
+    if count = 5 then
+    begin
+      dataStr := dataStr + sLineBreak;
+      count := 0;
+    end;
+  end;
+
+  // RichEdit1.Lines.Add(finalStr);
+  // imgSize := '0X' + IntToHex(imgHeight, 4) + ', ' + '0X' + IntToHex(imgWidth,
+  // 4) + ', ' + '0X01' + ', ';
+  imgStrH := IntToHex(imgHeight, 4);
+  imgStrW := IntToHex(imgWidth, 4);
+  dataSize := IntToHex(Length(dataBuffer), 8);
+
+  Colors.Lines.Add(finalStr);
+  flicData.Lines.Add(dataStr);
+
+  AssignFile(myFile, ExtractFilePath(imgPath) + filename + '.h');
+  ReWrite(myFile);
+  WriteLn(myFile, '#include "stdint.h"');
+  WriteLn(myFile, '#ifndef  _' + uppercase(filename) + '_H_');
+  WriteLn(myFile, '#define  _' + uppercase(filename) + '_H_');
+  WriteLn(myFile, 'uint8_t ' + filename + '[] = {');
+  WriteLn(myFile,
+    '//Image Height LSB, Image Height MSB,Image width LSB, Image width MSB,Flic Data Identification');
+  WriteLn(myFile, '0X' + copy(imgStrH, 3, 2) + ', ' + '0X' + copy(imgStrH, 1,
+      2) + ', ' + '0X' + copy(imgStrW, 3, 2) + ', ' + '0X' + copy(imgStrW, 1,
+      2) + ', ' + '0X01' + ', ');
+  WriteLn(myFile, '// Total Number of Chunks in Flic Data');
+  WriteLn(myFile, '0X' + copy(dataSize, 7, 2) + ', ' + '0X' + copy(dataSize, 5,
+      2) + ', ' + '0X' + copy(dataSize, 3, 2) + ', ' + '0X' + copy(dataSize, 1,
+      2) + ', ');
+  WriteLn(myFile, '// Pallete Buffer With BGR values of each pixel');
+  WriteLn(myFile, finalStr);
+  CloseFile(myFile);
+
+  append(myFile);
+  WriteLn(myFile,
+    '// Flic Buffer With Skip Identifier, Color Count, COlor Index Value in Pallert Buffer');
+  WriteLn(myFile, dataStr);
+  WriteLn(myFile, '}');
+  WriteLn(myFile, '#endif');
+  CloseFile(myFile);
+  { except
+
+    on E : Exception do
+    begin
+    ShowMessage('Could Not Able To open The file Pls Give Correct Path Name');
+    end; }
+
+
+
+  // End Of Color Processing .
+
+  AssignFile(F, 'd:\Test For Pallert');
+{$I-} ReWrite(F, 1); {$I+}
+  if IOResult = 0 then
+  begin
+    BlockWrite(F, ResultBytes[0], Sizeof(Byte) * Length(ResultBytes), w);
+  end;
+{$I-} CloseFile(F); {$I+}
+end;
+
+end.

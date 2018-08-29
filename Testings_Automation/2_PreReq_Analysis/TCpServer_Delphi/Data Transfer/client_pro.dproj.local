@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/08/31 11:28:44.172.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit3.pas=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.pas</Transaction>
+    <Transaction>2017/08/31 11:28:44.172.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit3.dfm=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.dfm</Transaction>
+    <Transaction>2017/08/31 11:28:49.509.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit4.pas=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.pas</Transaction>
+    <Transaction>2017/08/31 11:28:49.509.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit4.dfm=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.dfm</Transaction>
+    <Transaction>2017/08/31 11:29:08.708.dproj,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Project2.dproj=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\simple_data_sent.dproj</Transaction>
+    <Transaction>2017/08/31 15:19:36.649.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.pas=</Transaction>
+    <Transaction>2017/08/31 15:19:36.650.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.dfm=</Transaction>
+    <Transaction>2017/08/31 15:23:41.561.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.pas=</Transaction>
+    <Transaction>2017/08/31 15:23:41.561.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.dfm=</Transaction>
+    <Transaction>2017/08/31 15:43:39.434.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.pas=</Transaction>
+    <Transaction>2017/08/31 15:43:39.434.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.dfm=</Transaction>
+    <Transaction>2017/08/31 15:45:39.180.dproj,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\simple_data_sent.dproj=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client_pro.dproj</Transaction>
+    <Transaction>2017/09/08 16:08:13.507.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Major_programs\Data Transfer\server.pas=</Transaction>
+    <Transaction>2017/09/08 16:08:13.507.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Major_programs\Data Transfer\server.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,209 @@
+unit Unit2;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, ComCtrls, IOUtils;
+
+type
+
+  TForm2 = class(TForm)
+    Button1: TButton; // Label For Giving Image Path
+    Image1: TImage; // To Display Selecetd Image .
+    flicData: TRichEdit;
+    Colors: TRichEdit;
+    LabeledEdit1: TLabeledEdit;
+    procedure Button1Click(Sender: TObject); // Procedure For Generate Hex Data.
+    Procedure AppendTextFile(s, FileName: String);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    imgPath: string; // To Store The Image Path.
+    resStr: Array of string; // To Store The Hexa Values Of The Image.
+    imgWidth, imgHeight: Integer; // To Store Image Height And Image Weight.
+    imgSize: string;
+    ResultBytes: TBytes; // The Image Will Be converted As Bytes.
+    F: File; // The Resultant Bytes Will Be Stored In  d:\Test For Pallert.txt .
+    w: Integer; // To Store The Number Bytes Of The Image ..
+
+    colorindex, pallertcount, rptcolorcount: Byte;
+    datacount: Integer;
+
+    // rptcolorcount is to store How many Times The Same Color Has Appeared.
+
+    // colorindex is to store the index of the color in palllertBuffer.
+
+    // pallertcount is to point the PallertBuffer .
+
+    // datacount is to point the dataBuffer.
+
+    pallertBuffer: Array of Array of string; // PallertBuffer To Store Only The Unique Colors Of the Image.
+
+    dataBuffer: Array of Array of string; // dataBuffer To STore Encoded Format Of the Image.
+
+    pflag: Byte; // To Indicate The Status Of That Particular Color IS Already Inserted In PallertBuffer or Not.
+
+    finalStr: string; // To Store All The Data in Pallert Buffer As string.
+    dataStr: string; // Tio Store All The Data in dataBuffer As String.
+
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.Button1Click(Sender: TObject); // Whenever User Clicks On Generate Hex Data Than This Proc Will call.
+var
+  widIdx, heiIdx: Integer; // To Iterate In for Loop For All Pixels Of the Image(widIdx*heiidx).
+  DupItr: Integer; //
+  pItr: Integer;
+  resIdx: Integer;
+  myFile: TextFile; // Pallert Data Will Be stored in myFile-> paleertfile.txt.
+  flicFile: TextFile; // Flic Data Will Be stored in flicFile -> flicfile.txt.
+  totalCount: Integer;
+  FileName: string;
+  fItr: Byte;
+  dataSize: string;
+  imgStrH: string;
+  imgStrW: string;
+  count: Integer;
+  indx: Integer;
+  imgHeightMSB, imgHeightLSB, imgWidthMSB, imgWidthLSB, ImgDimesion_Str: string;
+  basepath: string;
+  Linenumber: Integer;
+  bytenumber: Integer;
+begin
+  finalStr := '';
+  dataStr := '';
+  pflag := 0;
+  pallertcount := 0;
+  datacount := 0;
+  colorindex := 0;
+  DupItr := 0;
+  resIdx := 0;
+  pItr := 0;
+  totalCount := 0;
+  dataSize := '';
+  imgStrH := '';
+  imgStrW := '';
+  count := 0;
+  bytenumber:=5;
+  Linenumber := 0;
+  imgPath := LabeledEdit1.Text;
+  FileName := TPath.GetFileNameWithoutExtension(imgPath);
+  Image1.picture.LoadFromFile(imgPath);
+  imgWidth := Image1.Width;
+  imgHeight := Image1.Height;
+  SetLength(ResultBytes, imgWidth * imgHeight * 3);
+
+  SetLength(resStr, imgWidth * imgHeight * 3);
+
+  SetLength(dataBuffer, imgWidth * imgHeight, 3); // DATA BUFFER
+
+  for heiIdx := 0 to imgHeight - 1 do
+  begin
+    for widIdx := 0 to imgWidth - 1 do
+    begin
+      ResultBytes[resIdx] := GetRValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+      ResultBytes[resIdx] := GetGValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+      ResultBytes[resIdx] := GetBValue(Image1.Canvas.Pixels[widIdx, heiIdx]);
+      Inc(resIdx);
+    end;
+  end;
+
+  imgStrH := IntToHex(imgHeight, 4);
+  imgStrW := IntToHex(imgWidth, 4);
+
+  imgHeightMSB := copy(imgStrH, 0, 2);
+  imgHeightLSB := copy(imgStrH, 3, 2);
+  imgHeightMSB := imgHeightMSB;
+  imgHeightLSB := imgHeightLSB;
+
+  imgWidthMSB := copy(imgStrW, 0, 2);
+  imgWidthLSB := copy(imgStrW, 3, 2);
+
+  imgWidthMSB := imgWidthMSB;
+  imgWidthLSB := imgWidthLSB;
+
+  ImgDimesion_Str := imgHeightLSB + imgHeightMSB  + imgWidthLSB + imgWidthMSB + 'FF';
+
+  basepath := ExtractFilePath(imgPath);
+
+ // AppendTextFile(ImgDimesion_Str, basepath + FileName + '.txt');
+
+  finalStr:=finalStr+ImgDimesion_Str ;
+  count:=5;
+  for indx := 0 to Length(ResultBytes) - 1 do
+  begin
+    finalStr := finalStr + IntToHex(ResultBytes[indx], 2) ;
+    count := count + 1;
+    if (count = 1024) then
+    begin
+      Linenumber := Linenumber + 1;
+      finalStr:=finalStr+'/*'+IntToStr(Linenumber)+'*/'+ sLineBreak;
+      count := 0;
+    end;
+  end;
+  if count>0 then
+  begin
+
+  end;
+  Linenumber := Linenumber + 1;
+  finalStr
+  AppendTextFile(finalStr, basepath + FileName + '.txt');
+
+  ShowMessage('File Saved Sucessfully !!');
+end;
+
+Procedure TForm2.AppendTextFile(s, FileName: String);
+Var
+  T: TextFile;
+  FileWithoutExt: String;
+  iFileHandle, SizeOfFile: Integer;
+Begin
+  try
+    If IoResult <> 0 Then
+      ;
+    AssignFile(T, FileName);
+{$I-} Reset(T); {$I+}
+    If IoResult <> 0 Then
+    begin
+{$I-} ReWrite(T){$I+}
+    end
+    Else
+    begin
+{$I-} Append(T); {$I+}
+    end;
+    if IoResult = 0 then
+    begin
+{$I-} Writeln(T, s); {$I+}
+      CloseFile(T);
+      // added to create new file when the files size exceeds to 5MB
+      iFileHandle := FileOpen(FileName, fmOpenRead);
+      SizeOfFile := FileSeek(iFileHandle, 0, 2);
+{$I-} fileclose(iFileHandle); {$I+}
+      if SizeOfFile >= 10242880 { 10 MB } then
+      begin
+        FileWithoutExt := copy(FileName, 1, pos('.', FileName) - 1);
+        RenameFile(FileName, FileWithoutExt + '_' + FormatDateTime('HH_MM',
+            Now) + '.txt')
+      end;
+    end;
+    If IoResult <> 0 Then
+      ;
+  Except
+    On E: Exception do
+      // AppendTextFile('AppendTextFile' + E.Message + '  Time : ' + DatetimetoStr
+      // (Now), 'C:\NMRH\ICharger\Bugs.txt');
+      ;
+  End;
+end;
+
+end.

@@ -1,0 +1,76 @@
+1) RST Flag
+https://stackoverflow.com/questions/251243/what-causes-a-tcp-ip-reset-rst-flag-to-be-sent
+2) Retransmission
+https://stackoverflow.com/questions/5227520/how-many-times-will-tcp-retransmit
+3) Using PSH flag
+https://stackoverflow.com/questions/9153566/difference-between-push-and-urgent-flags-in-tcp
+4) Using URG flag
+https://tools.ietf.org/html/rfc6093(Standard document for URG related information).
+https://stackoverflow.com/questions/40241437/is-urgent-tcp-data-acknowledged?noredirect=1&lq=1
+5) TIME_WAIT
+http://www.serverframework.com/asynchronousevents/2011/01/time-wait-and-its-design-implications-for-protocols-and-scalable-servers.html
+6) Parameters in TCP 
+https://technet.microsoft.com/en-us/library/cc962453.aspx
+7) TCP Retransmission
+https://stackoverflow.com/questions/5227520/how-many-times-will-tcp-retransmit
+
+Good explanation about Retransmission
+:-| https://stackoverflow.com/questions/12956685/what-are-the-retransmission-rules-for-tcp
+
+Understanding TCP
+:-| https://www.cubrid.org/blog/understanding-tcp-ip-network-stack
+
+Note:
+|-: Why  Many Connections are used to be in Close_wait,Fin_wait2....??
+:-| https://benohead.com/tcp-about-fin_wait_2-time_wait-and-close_wait/
+
+IBM Tcp related Doc  
+:-| https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.1.0/com.ibm.zos.v2r1.halu101/constatus.htm
+
+KeepAlive Failures 
+:-| http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html
+
+TCP Handshake packet lost: 
+:-| https://stackoverflow.com/questions/16259774/what-if-a-tcp-handshake-segment-is-lost
+
+FIN vs RST ?? 
+:-| https://stackoverflow.com/questions/13049828/fin-vs-rst-in-tcp-connections
+
+A TCP Stuck connection mystery 
+:-| http://www.evanjones.ca/tcp-stuck-connection-mystery.html
+
+What Happens If TCP Sever Closed?? 
+:-| https://stackoverflow.com/questions/2428804/tcp-socket-closed
+
+SYN Attack 
+:-| https://www.symantec.com/connect/articles/hardening-tcpip-stack-syn-attacks
+
+Why 1500 bytes only in TCP Segment ?? 
+https://www.quora.com/Why-is-the-IP-packet-size-in-practice-only-1500-bytes
+https://stackoverflow.com/questions/2613734/maximum-packet-size-for-a-tcp-connection
+
+
+Why FIN & SYN should have sequence number ?? 
+https://stackoverflow.com/questions/2352524/why-does-a-syn-or-fin-bit-in-a-tcp-segment-consume-a-byte-in-the-sequence-number
+
+
+What is the Exact need of Keep-Alive packet ?? 
+https://blog.stackpath.com/glossary/keep-alive/
+https://social.msdn.microsoft.com/Forums/en-US/d20e5e67-d23c-42a5-95c5-ba80f4263546/keepalive-packets-continue-being-sent-after-client-closes-server-socket-is-closewait-client?forum=netfxnetcom
+
+What is Half-Open connection? 
+https://networkengineering.stackexchange.com/questions/26141/continue-to-use-the-same-connection-after-receiving-fin-ack
+https://networkengineering.stackexchange.com/questions/24730/tcp-with-half-open-connection-how-to-transmit-data?rq=1
+
+
+TCP Main Module code ? 
+refer TCP/IP Suite B.Forouzan(492 page)
+
+
+Is SCTP is better than TCP?
+refer TCP/IP Suite B.Forouzan(504 page)
+
+
+
+When Max retransmission count reaches, client abnormally closes the connection by sending RST flag. 
+

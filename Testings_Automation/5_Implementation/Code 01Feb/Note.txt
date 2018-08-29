@@ -1,0 +1,7 @@
+
+1) Need to Stop the Background Threads When Application Is Closing 
+2) Need to Close the MainForm, because it was just hidden --> Because Threads & Next Window is not happening.
+3) Command Response Processing 
+4) Communication Checker 
+
+IN Testing Mode AAC Module is sending AA DD (it should be AA CC) , so it is not showing any devices as connected

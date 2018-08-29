@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/08/31 11:28:44.172.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit3.pas=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.pas</Transaction>
+    <Transaction>2017/08/31 11:28:44.172.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit3.dfm=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server.dfm</Transaction>
+    <Transaction>2017/08/31 11:28:49.509.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit4.pas=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.pas</Transaction>
+    <Transaction>2017/08/31 11:28:49.509.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Unit4.dfm=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.dfm</Transaction>
+    <Transaction>2017/08/31 11:29:08.708.dproj,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\Project2.dproj=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\simple_data_sent.dproj</Transaction>
+    <Transaction>2017/08/31 12:58:01.003.dproj,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\simple_data_sent.dproj=C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\server_pro.dproj</Transaction>
+    <Transaction>2017/08/31 15:18:25.246.pas,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.pas=</Transaction>
+    <Transaction>2017/08/31 15:18:25.246.dfm,C:\Users\yanil.EFFTRONICS\Documents\RAD Studio\Projects\client.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

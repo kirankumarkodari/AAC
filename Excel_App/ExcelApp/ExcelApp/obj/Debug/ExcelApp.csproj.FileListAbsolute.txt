@@ -1,0 +1,10 @@
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\bin\Debug\ExcelApp.exe.config
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\bin\Debug\ExcelApp.exe
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\bin\Debug\ExcelApp.pdb
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.csprojResolveAssemblyReference.cache
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.Form1.resources
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.Properties.Resources.resources
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.csproj.GenerateResource.Cache
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.exe
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.pdb
+D:\Projects\AAC\Excel_App\ExcelApp\ExcelApp\obj\Debug\ExcelApp.csproj.ResolveComReference.cache

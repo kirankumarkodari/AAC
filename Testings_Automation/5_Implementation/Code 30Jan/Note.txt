@@ -1,0 +1,4 @@
+
+1) Need to Stop the Background Threads When Application Is Closing 
+2) Need to Close the MainForm, because it was just hidden.
+3) Need to Verify last Single Dgit is Merging with F or not.

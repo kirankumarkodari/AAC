@@ -1,0 +1,41 @@
+1) How the strings are transmitting in TCP?? 
+Ans:  Characters equalent ascii value will be transmitted as stream of bytes. 
+
+2) Does keeping MSS Size smaller improve speed of transmission?
+http://searchnetworking.techtarget.com/definition/maximum-segment-size
+
+3) What is the minimum size of IP Header ?? 
+20 bytes & longer is 60 bytes. 
+
+4) Explaining TCP Header ?
+ http://searchnetworking.techtarget.com/tutorial/Routing-First-Step-IP-header-format
+
+5) IP fragmentation ?
+https://en.wikipedia.org/wiki/IP_fragmentation
+https://www.youtube.com/watch?v=DgcbVsGIYfE
+
+6) How valuable is Window scaling ?
+https://serverfault.com/questions/256697/how-valuable-is-tcp-window-scaling
+
+7) What exactly MSS role in TCP ? 
+http://www-01.ibm.com/support/docview.wss?uid=isg3T1024368
+https://networkengineering.stackexchange.com/questions/33574/is-mss-negotiated-or-exchanged-during-the-3-way-handshake
+
+8) RFC's Related to Window scale ?
+http://www.networksorcery.com/enp/rfc/rfc1323.txt
+Window:
+http://www.networksorcery.com/enp/rfc/rfc1072.txt
+Timestamps:
+http://www.networksorcery.com/enp/rfc/rfc1185.txt
+
+Article: 
+http://packetlife.net/blog/2010/aug/4/tcp-windows-and-window-scaling/
+
+9) Tcp Receive windows 
+http://blog.performancevision.com/tcp-receive-windows
+
+10) Windows auto tuning option of tcp ? 
+http://www.thewindowsclub.com/window-auto-tuning-in-windows-10
+
+
+
